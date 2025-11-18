@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCar } from "../context/CarContext";
 import Layout from "../components/Layout";
 
 export default function PersonalInfo() {
+  const navigate = useNavigate();
   const { selectedPlan } = useCar();
   
   const [formData, setFormData] = useState({
@@ -222,13 +224,22 @@ export default function PersonalInfo() {
               />
             </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-[#128C3B] hover:bg-[#0f7330] text-white font-bold py-4 px-6 rounded-lg transition duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg"
-            >
-              ยืนยันข้อมูล
-            </button>
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="sm:w-1/3 bg-gray-600 hover:bg-gray-700 text-white font-bold py-4 px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg"
+              >
+                ← ย้อนกลับ
+              </button>
+              <button
+                type="submit"
+                className="sm:w-2/3 bg-[#128C3B] hover:bg-[#0f7330] text-white font-bold py-4 px-6 rounded-lg transition duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg"
+              >
+                ✓ ยืนยันข้อมูล
+              </button>
+            </div>
           </form>
         </div>
       </div>
