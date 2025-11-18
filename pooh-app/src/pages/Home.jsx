@@ -34,7 +34,7 @@ export default function Home() {
       backgroundColor: "#128C3B",
       minHeight: "100vh"
     }}>
-      {/* ⭐ Header แบบสวยพิเศษ */}
+      {/* ⭐ Header พร้อมวงรี */}
       <div style={{
         backgroundColor: "white",
         borderRadius: 20,
@@ -44,14 +44,18 @@ export default function Home() {
         textAlign: "center",
         border: "3px solid #128C3B"
       }}>
+        {/* ⭐ วงรีสีเขียว */}
         <div style={{
-          display: "inline-block",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
           backgroundColor: "#128C3B",
-          borderRadius: "60px / 40px",
-          padding: "20px 40px",
+          borderRadius: "50%",
+          width: 180,                    // ⭐ กว้าง
+          height: 120,                   // ⭐ สูงน้อยกว่า
           marginBottom: 20
         }}>
-          <span style={{ fontSize: 50 }}>🚗</span> {/* ⭐ ใช้ Emoji แทน */}
+          <span style={{ fontSize: 50 }}>🚗</span>
         </div>
         
         <h1 style={{ 
