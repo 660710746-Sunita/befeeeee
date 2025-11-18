@@ -96,3 +96,30 @@ export const getAllBrands = async () => {
   
   return brands.sort();
 };
+
+// ดึงข้อมูลแผนประกันและราคาตรงตามที่เลือก
+export const getInsurancePlansBySelection = async (brandCode, modelCode, subModelCode, year) => {
+  const allData = await getAllInsuranceData();
+  
+  const plans = allData
+    .filter(row => 
+      row.CAR_BRAND_CODE?.trim() === brandCode?.trim() && 
+      row.CAR_MODEL_CODE?.trim() === modelCode?.trim() &&
+      row.CAR_SUBMODEL_CODE?.trim() === subModelCode?.trim() &&
+      row.CAR_YEAR?.toString().trim() === year?.toString().trim()
+    )
+    .map((row, index) => ({
+      id: index,
+      name: row.SUB_PACKAGE_NAME || 'Unknown Plan',
+      price: parseFloat(row.GROSS_PREMIUM) || 0,
+      sumInsured: parseFloat(row.SUM_INSURED) || 0,
+      packageCode: row.SUB_PACKAGE_CODE,
+      original: row // เก็บข้อมูลเดิมไว้เผื่อต้องใช้ในภายหลัง
+    }))
+    // ลบ duplicates โดยเก็บเฉพาะแผนที่ไม่ซ้ำ
+    .filter((plan, index, self) => 
+      index === self.findIndex(p => p.name === plan.name && p.price === plan.price)
+    );
+  
+  return plans;
+};
