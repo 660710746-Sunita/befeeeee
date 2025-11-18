@@ -8,9 +8,9 @@ const { setSelectedPlan } = useCar();
 
 
 const plans = [
-{ id: 1, name: "แผน A", price: 12000 },
-{ id: 2, name: "แผน B", price: 15000 },
-{ id: 3, name: "แผน C", price: 18000 }
+{ id: 1, name: "2+", price: 12000 },
+{ id: 2, name: "3+", price: 15000 },
+{ id: 3, name: "3 ธรรมดา", price: 18000 }
 ];
 
 

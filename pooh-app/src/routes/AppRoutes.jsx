@@ -12,7 +12,7 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/select" element={<SelectCar />} />
       <Route path="/list" element={<InsuranceList />} />
-      <Route path="/detail/:id" element={<InsuranceDetail />} />
+      <Route path="/detail" element={<InsuranceDetail />} />
       <Route path="/info" element={<PersonalInfo />} />
     </Routes>
   );
