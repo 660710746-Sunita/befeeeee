@@ -7,23 +7,23 @@ export default function Home() {
   const { setBrand } = useCar();
 
   const brands = [
-  { name: "BMW", img: "/assets/BMW.jpg" },
-  { name: "Chevrolet", img: "/assets/Chevrolet.jpg" },
-  { name: "Ford", img: "/assets/Ford.jpg" },
-  { name: "Haval", img: "/assets/Haval.jpg" },
-  { name: "Honda", img: "/assets/Honda.jpg" },
-  { name: "Hyundai", img: "/assets/Hyundai.jpg" },
-  { name: "Isuzu", img: "/assets/Isuzu.jpg" },
-  { name: "KIA", img: "/assets/KIA.jpg" },
-  { name: "MG", img: "/assets/MG.jpg" },
-  { name: "Mazda", img: "/assets/Mazda.jpg" },
-  { name: "Mercedes Benz", img: "/assets/Mercedes_benz.jpg" }, // ⚠️ มีเว้นวรรค
-  { name: "Mitsubishi", img: "/assets/Mitsubishi.jpg" },
-  { name: "Nissan", img: "/assets/Nissan.jpg" },
-  { name: "Proton", img: "/assets/Proton.jpg" },
-  { name: "Suzuki", img: "/assets/Suzuki.jpg" },
-  { name: "Tata", img: "/assets/Tata.jpg" },
-  { name: "Toyota", img: "/assets/Toyota.jpg" }
+    { name: "BMW", code: "BMW", img: "/assets/BMW.jpg" },
+    { name: "Chevrolet", code: "CHEVROLET", img: "/assets/Chevrolet.jpg" },
+    { name: "Ford", code: "FORD", img: "/assets/Ford.jpg" },
+    { name: "Haval", code: "HAVAL", img: "/assets/Haval.jpg" },
+    { name: "Honda", code: "HONDA", img: "/assets/Honda.jpg" },
+    { name: "Hyundai", code: "HYUNDAI", img: "/assets/Hyundai.jpg" },
+    { name: "Isuzu", code: "ISUZU", img: "/assets/Isuzu.jpg" },
+    { name: "KIA", code: "KIA", img: "/assets/KIA.jpg" },
+    { name: "MG", code: "MG", img: "/assets/MG.jpg" },
+    { name: "Mazda", code: "MAZDA", img: "/assets/Mazda.jpg" },
+    { name: "Mercedes Benz", code: "MERCEDES BENZ", img: "/assets/Mercedes_benz.jpg" },
+    { name: "Mitsubishi", code: "MITSUBISHI", img: "/assets/Mitsubishi.jpg" },
+    { name: "Nissan", code: "NISSAN", img: "/assets/Nissan.jpg" },
+    { name: "Proton", code: "PROTON", img: "/assets/Proton.jpg" },
+    { name: "Suzuki", code: "SUZUKI", img: "/assets/Suzuki.jpg" },
+    { name: "Tata", code: "TATA", img: "/assets/Tata.jpg" },
+    { name: "Toyota", code: "TOYOTA", img: "/assets/Toyota.jpg" }
   ];
 
   return (
@@ -39,12 +39,12 @@ export default function Home() {
       }}>
         {brands.map((b) => (
           <CarBrandCard
-            key={b.name}
+            key={b.code}
             brand={b.name}
             img={b.img}
             onSelect={() => {
-              setBrand(b.name);
-              navigate("/select-car");
+              setBrand(b.code); // ส่ง code แทน name
+              navigate("/select");
             }}
           />
         ))}
@@ -64,8 +64,8 @@ export default function Home() {
         <select 
           onChange={(e) => {
             if (e.target.value) {
-              setBrand(e.target.value);
-              navigate("/select-car");
+              setBrand(e.target.value); // ส่ง code
+              navigate("/select");
             }
           }}
           style={{
@@ -79,7 +79,7 @@ export default function Home() {
         >
           <option value="">-- กรุณาเลือก --</option>
           {brands.map((b) => (
-            <option key={b.name} value={b.name}>{b.name}</option>
+            <option key={b.code} value={b.code}>{b.name}</option>
           ))}
         </select>
       </div>

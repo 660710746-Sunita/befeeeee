@@ -10,10 +10,10 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/select-car" element={<SelectCar />} />
-      <Route path="/insurance-list" element={<InsuranceList />} />
-      <Route path="/insurance-detail/:id" element={<InsuranceDetail />} />
-      <Route path="/personal-info" element={<PersonalInfo />} />
+      <Route path="/select" element={<SelectCar />} />
+      <Route path="/list" element={<InsuranceList />} />
+      <Route path="/detail/:id" element={<InsuranceDetail />} />
+      <Route path="/info" element={<PersonalInfo />} />
     </Routes>
   );
 }
