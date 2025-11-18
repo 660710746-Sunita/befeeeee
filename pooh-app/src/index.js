@@ -1,12 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./index.css";  // ใช้สำหรับโหลด CSS หลักของเว็บ
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';  // ← ต้องมีบรรทัดนี้
+import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
