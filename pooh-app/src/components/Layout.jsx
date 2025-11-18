@@ -14,7 +14,7 @@ export default function Layout({ children }) {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-6 mt-12">
         <div className="container mx-auto px-4 text-center">
-          <p>© 2024 ระบบประกันภัยรถยนต์. สงวนลิขสิทธิ์.</p>
+          <p>© 2025 ระบบประกันภัยรถยนต์. สงวนลิขสิทธิ์.</p>
         </div>
       </footer>
     </div>

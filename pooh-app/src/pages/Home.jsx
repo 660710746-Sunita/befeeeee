@@ -34,6 +34,60 @@ export default function Home() {
       backgroundColor: "#128C3B",
       minHeight: "100vh"
     }}>
+      {/* ⭐ แถบโลโก้ด้านบนสุด */}
+      <div style={{
+        backgroundColor: "white",
+        borderRadius: 15,
+        padding: "25px 35px",
+        marginBottom: 30,
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+        display: "flex",
+        alignItems: "center",
+        gap: 25,
+        borderLeft: "6px solid #128C3B"
+      }}>
+        {/* โลโก้รูปจริง */}
+        <img 
+          src="/assets/Thaivivat.jpg" 
+          alt="Thaivivat Insurance"
+          style={{
+            height: 80,
+            width: "auto",
+            objectFit: "contain"
+          }}
+        />
+        
+        {/* เส้นแบ่ง */}
+        <div style={{
+          width: 3,
+          height: 60,
+          backgroundColor: "#e0e0e0",
+          borderRadius: 2
+        }}></div>
+        
+        {/* ข้อความ */}
+        <div>
+          <h2 style={{
+            fontSize: 36,
+            fontWeight: "bold",
+            color: "#128C3B",
+            margin: 0,
+            letterSpacing: "0.5px",
+            lineHeight: 1.2
+          }}>
+            ประกันภัยไทยวิวัฒน์
+          </h2>
+          <p style={{
+            fontSize: 16,
+            color: "#666",
+            margin: "5px 0 0 0",
+            fontWeight: 500
+          }}>
+            Thaivivat Insurance
+          </p>
+        </div>
+      </div>
+
       {/* ⭐ Header พร้อมวงรี */}
       <div style={{
         backgroundColor: "white",
@@ -44,15 +98,14 @@ export default function Home() {
         textAlign: "center",
         border: "3px solid #128C3B"
       }}>
-        {/* ⭐ วงรีสีเขียว */}
         <div style={{
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "#128C3B",
           borderRadius: "50%",
-          width: 180,                    // ⭐ กว้าง
-          height: 120,                   // ⭐ สูงน้อยกว่า
+          width: 180,
+          height: 120,
           marginBottom: 20
         }}>
           <span style={{ fontSize: 50 }}>🚗</span>
