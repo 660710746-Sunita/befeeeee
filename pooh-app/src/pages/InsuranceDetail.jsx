@@ -60,4 +60,4 @@ export default function InsuranceDetail() {
             <button onClick={() => navigate(-1)}>ย้อนกลับ</button>
         </div>
     );
-}
+}/**/

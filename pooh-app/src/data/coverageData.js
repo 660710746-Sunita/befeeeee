@@ -19,4 +19,4 @@ const coverageData = {
   }
 };
 
-export default coverageData;
+export default coverageData;/**/
