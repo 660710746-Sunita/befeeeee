@@ -7,42 +7,23 @@ export default function Home() {
   const { setBrand } = useCar();
 
   const brands = [
-    { 
-      name: "Toyota", 
-      img: "https://cdn.freebiesupply.com/logos/large/2x/toyota-logo-png-transparent.png" 
-    },
-    { 
-      name: "Honda", 
-      img: "https://cdn.freebiesupply.com/logos/large/2x/honda-logo-png-transparent.png" 
-    },
-    { 
-      name: "Mazda", 
-      img: "https://cdn.freebiesupply.com/logos/large/2x/mazda-logo-png-transparent.png" 
-    },
-    { 
-      name: "Nissan", 
-      img: "https://cdn.freebiesupply.com/logos/large/2x/nissan-6-logo-png-transparent.png" 
-    },
-    { 
-      name: "Ford", 
-      img: "https://cdn.freebiesupply.com/logos/large/2x/ford-logo-png-transparent.png" 
-    },
-    { 
-      name: "BMW", 
-      img: "https://cdn.freebiesupply.com/logos/large/2x/bmw-logo-png-transparent.png" 
-    },
-    { 
-      name: "Mercedes-Benz", 
-      img: "https://cdn.freebiesupply.com/logos/large/2x/mercedes-benz-logo-png-transparent.png" 
-    },
-    { 
-      name: "Chevrolet", 
-      img: "https://cdn.freebiesupply.com/logos/large/2x/chevrolet-logo-png-transparent.png" 
-    },
-    { 
-      name: "Mitsubishi", 
-      img: "https://cdn.freebiesupply.com/logos/large/2x/mitsubishi-motors-logo-png-transparent.png" 
-    }
+  { name: "BMW", img: "/assets/BMW.jpg" },
+  { name: "Chevrolet", img: "/assets/Chevrolet.jpg" },
+  { name: "Ford", img: "/assets/Ford.jpg" },
+  { name: "Haval", img: "/assets/Haval.jpg" },
+  { name: "Honda", img: "/assets/Honda.jpg" },
+  { name: "Hyundai", img: "/assets/Hyundai.jpg" },
+  { name: "Isuzu", img: "/assets/Isuzu.jpg" },
+  { name: "KIA", img: "/assets/KIA.jpg" },
+  { name: "MG", img: "/assets/MG.jpg" },
+  { name: "Mazda", img: "/assets/Mazda.jpg" },
+  { name: "Mercedes Benz", img: "/assets/Mercedes_benz.jpg" }, // ⚠️ มีเว้นวรรค
+  { name: "Mitsubishi", img: "/assets/Mitsubishi.jpg" },
+  { name: "Nissan", img: "/assets/Nissan.jpg" },
+  { name: "Proton", img: "/assets/Proton.jpg" },
+  { name: "Suzuki", img: "/assets/Suzuki.jpg" },
+  { name: "Tata", img: "/assets/Tata.jpg" },
+  { name: "Toyota", img: "/assets/Toyota.jpg" }
   ];
 
   return (
