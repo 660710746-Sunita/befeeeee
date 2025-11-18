@@ -27,15 +27,59 @@ export default function Home() {
   ];
 
   return (
-    <div style={{ padding: 20, maxWidth: 900, margin: "0 auto" }}>
-      <h1>เลือกยี่ห้อรถ</h1>
+    <div style={{ 
+      padding: 20, 
+      maxWidth: 900, 
+      margin: "0 auto",
+      backgroundColor: "#128C3B",
+      minHeight: "100vh"
+    }}>
+      {/* ⭐ Header แบบสวยพิเศษ */}
+      <div style={{
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: "40px 30px",
+        marginBottom: 30,
+        boxShadow: "0 8px 16px rgba(0, 0, 0, 0.15)",
+        textAlign: "center",
+        border: "3px solid #128C3B"
+      }}>
+        <div style={{
+          display: "inline-block",
+          backgroundColor: "#128C3B",
+          borderRadius: "60px / 40px",
+          padding: "20px 40px",
+          marginBottom: 20
+        }}>
+          <span style={{ fontSize: 50 }}>🚗</span> {/* ⭐ ใช้ Emoji แทน */}
+        </div>
+        
+        <h1 style={{ 
+          fontSize: 56,
+          fontWeight: "bold",
+          color: "#128C3B",
+          margin: "10px 0",
+          letterSpacing: "-1px"
+        }}>
+          เลือกยี่ห้อรถ
+        </h1>
+        
+        <p style={{
+          color: "#666",
+          fontSize: 20,
+          marginTop: 15,
+          marginBottom: 0,
+          fontWeight: 500
+        }}>
+          คลิกที่การ์ดเพื่อเลือกยี่ห้อรถที่คุณต้องการ
+        </p>
+      </div>
       
       {/* Grid สำหรับแสดงการ์ด - แถวละ 3 รูป */}
       <div style={{ 
         display: "grid", 
         gridTemplateColumns: "repeat(3, 1fr)",
-        gap: 20,
-        marginBottom: 40
+        gap: 20
       }}>
         {brands.map((b) => (
           <CarBrandCard
@@ -43,45 +87,11 @@ export default function Home() {
             brand={b.name}
             img={b.img}
             onSelect={() => {
-              setBrand(b.code); // ส่ง code แทน name
+              setBrand(b.code);
               navigate("/select");
             }}
           />
         ))}
-      </div>
-
-      {/* Dropdown อยู่ล่างสุด */}
-      <div style={{ 
-        marginTop: 40,
-        padding: 20,
-        backgroundColor: "#f5f5f5",
-        borderRadius: 8,
-        textAlign: "center"
-      }}>
-        <label style={{ fontSize: 18, marginRight: 10, fontWeight: "bold" }}>
-          เลือกยี่ห้อ:
-        </label>
-        <select 
-          onChange={(e) => {
-            if (e.target.value) {
-              setBrand(e.target.value); // ส่ง code
-              navigate("/select");
-            }
-          }}
-          style={{
-            padding: "10px 20px",
-            fontSize: 16,
-            borderRadius: 5,
-            border: "1px solid #ddd",
-            minWidth: 200,
-            cursor: "pointer"
-          }}
-        >
-          <option value="">-- กรุณาเลือก --</option>
-          {brands.map((b) => (
-            <option key={b.code} value={b.code}>{b.name}</option>
-          ))}
-        </select>
       </div>
     </div>
   );
