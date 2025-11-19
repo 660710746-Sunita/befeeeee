@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: insurance_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: insurance_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - insurance_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # pgAdmin for Database Management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: insurance_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@insurance.local
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - insurance_network
+
+  # Go Backend API Server
+  go_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: insurance_api
+    environment:
+      DATABASE_URL: "postgres://postgres:password@postgres:5432/insurance_db?sslmode=disable"
+      PORT: 8080
+      GIN_MODE: debug
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - insurance_network
+    restart: unless-stopped
+
+networks:
+  insurance_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
