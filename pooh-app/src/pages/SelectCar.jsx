@@ -64,13 +64,52 @@ export default function SelectCar() {
       <div className="container mx-auto py-8 px-4">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <h1 className="text-4xl font-bold text-[#128C3B] mb-2">
               เลือกข้อมูลรถยนต์
             </h1>
             <p className="text-gray-600">
               ยี่ห้อ: <span className="font-bold text-[#128C3B]">{brand}</span>
             </p>
+          </div>
+
+          {/* ⭐ Progress Indicator - สีเขียวถึงขั้นตอนที่ 2 */}
+          <div className="flex items-center justify-center gap-2 mb-8 max-w-2xl mx-auto">
+            {/* Step 1 - เลือกยี่ห้อ (เสร็จแล้ว - สีเขียว) */}
+            <div className="flex items-center">
+              <div className="bg-[#128C3B] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-lg">
+                ✓
+              </div>
+              <span className="ml-2 font-semibold text-[#128C3B] text-sm md:text-base">
+                เลือกยี่ห้อ
+              </span>
+            </div>
+            
+            {/* Line 1-2 (สีเขียว) */}
+            <div className="flex-1 h-1 bg-[#128C3B] rounded mx-2"></div>
+            
+            {/* Step 2 - เลือกรุ่น (กำลังทำ - สีเขียว) */}
+            <div className="flex items-center">
+              <div className="bg-[#128C3B] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-lg">
+                2
+              </div>
+              <span className="ml-2 font-semibold text-[#128C3B] text-sm md:text-base">
+                เลือกรุ่น
+              </span>
+            </div>
+            
+            {/* Line 2-3 (สีเทา) */}
+            <div className="flex-1 h-1 bg-gray-300 rounded mx-2"></div>
+            
+            {/* Step 3 - เลือกแผน (ยังไม่ถึง - สีเทา) */}
+            <div className="flex items-center">
+              <div className="bg-gray-300 text-gray-600 rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                3
+              </div>
+              <span className="ml-2 text-gray-500 text-sm md:text-base">
+                เลือกแผน
+              </span>
+            </div>
           </div>
 
           {/* Form Card */}

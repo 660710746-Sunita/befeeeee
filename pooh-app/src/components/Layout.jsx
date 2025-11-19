@@ -9,26 +9,25 @@ export default function Layout({ children }) {
           <div className="flex items-center justify-between h-20">
             {/* Logo & Brand Name */}
             <Link to="/" className="flex items-center space-x-3 hover:opacity-90 transition">
-              <div className="bg-white rounded-full p-2 shadow-md">
-                <svg 
-                  className="w-8 h-8 text-[#128C3B]" 
-                  fill="currentColor" 
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-                </svg>
-              </div>
+              {/* ⭐ เปลี่ยนเป็นโลโก้ไทยวิวัฒน์ */}
+              
+                <img 
+                  src="/assets/Thaivivatt.jpg" 
+                  alt="Thaivivat Logo"
+                  className="w-12 h-12 object-contain rounded-full"
+                />
+              
               <div>
                 <h1 className="text-2xl md:text-3xl font-bold text-white">
                   ประกันภัยไทยวิวัฒน์
                 </h1>
                 <p className="text-xs md:text-sm text-white/90 hidden sm:block">
-                  Thai Vivat Insurance
+                  Thaivivat Insurance
                 </p>
               </div>
             </Link>
 
-            {/* Navigation Menu (Optional) */}
+            {/* Navigation Menu */}
             <nav className="hidden md:flex items-center space-x-6">
               <Link 
                 to="/" 
@@ -40,7 +39,7 @@ export default function Layout({ children }) {
                 to="/select" 
                 className="text-white hover:bg-white/20 px-4 py-2 rounded-lg transition font-semibold"
               >
-                เลือกรถ
+                
               </Link>
             </nav>
 
@@ -62,15 +61,26 @@ export default function Layout({ children }) {
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8 mt-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Company Info */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Company Info - ⭐ เปลี่ยนข้อความใหม่ */}
             <div>
               <h3 className="text-xl font-bold mb-4 text-[#128C3B]">
                 ประกันภัยไทยวิวัฒน์
               </h3>
-              <p className="text-gray-400 text-sm">
-                บริษัทประกันภัยชั้นนำของไทย มุ่งมั่นให้บริการที่ดีที่สุด
-              </p>
+              <div className="text-gray-400 text-sm space-y-1">
+                <p className="font-semibold text-gray-300">
+                  บริษัท ประกันภัยไทยวิวัฒน์ จำกัด (มหาชน)
+                </p>
+                <p>
+                  71 ถนนดินแดง แขวงสามเสนใน
+                </p>
+                <p>
+                  เขตพญาไท กรุงเทพฯ 10400
+                </p>
+                <p className="mt-3 text-[#128C3B] font-semibold">
+                  ใบอนุญาตเลขที่ 8/2516
+                </p>
+              </div>
             </div>
 
             {/* Contact Info */}
@@ -79,30 +89,12 @@ export default function Layout({ children }) {
               <div className="space-y-2 text-sm text-gray-400">
                 <p>📞 โทร: 02-xxx-xxxx</p>
                 <p>📧 อีเมล: info@thaivivat.com</p>
-                <p>🏢 ที่อยู่: กรุงเทพมหานคร</p>
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h4 className="text-lg font-semibold mb-4">เมนูด่วน</h4>
-              <div className="space-y-2 text-sm">
-                <Link to="/" className="block text-gray-400 hover:text-[#128C3B] transition">
-                  หน้าแรก
-                </Link>
-                <Link to="/select" className="block text-gray-400 hover:text-[#128C3B] transition">
-                  เลือกรถ
-                </Link>
-                <a href="#" className="block text-gray-400 hover:text-[#128C3B] transition">
-                  เกี่ยวกับเรา
-                </a>
+                <p>🏢 สำนักงานใหญ่: กรุงเทพมหานคร</p>
               </div>
             </div>
           </div>
 
-          <div className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
-            <p>© 2024 ประกันภัยไทยวิวัฒน์ สงวนลิขสิทธิ์</p>
-          </div>
+          {/* ⭐ เอา Copyright ออก - ไม่มีอะไรในส่วนนี้แล้ว */}
         </div>
       </footer>
     </div>

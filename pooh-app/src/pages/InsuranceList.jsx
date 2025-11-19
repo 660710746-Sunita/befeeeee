@@ -48,11 +48,50 @@ export default function InsuranceList() {
         <div className="max-w-6xl mx-auto">
           
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <h1 className="text-4xl font-bold text-[#128C3B] mb-2">
               📋 รายการแผนประกัน
             </h1>
             <p className="text-gray-600">เลือกแผนประกันที่เหมาะสมกับคุณ</p>
+          </div>
+
+          {/* ⭐ Progress Indicator - สีเขียวถึงขั้นตอนที่ 3 */}
+          <div className="flex items-center justify-center gap-2 mb-8 max-w-2xl mx-auto">
+            {/* Step 1 - เลือกยี่ห้อ (เสร็จแล้ว - สีเขียว) */}
+            <div className="flex items-center">
+              <div className="bg-[#128C3B] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-lg">
+                ✓
+              </div>
+              <span className="ml-2 font-semibold text-[#128C3B] text-sm md:text-base">
+                เลือกยี่ห้อ
+              </span>
+            </div>
+            
+            {/* Line 1-2 (สีเขียว) */}
+            <div className="flex-1 h-1 bg-[#128C3B] rounded mx-2"></div>
+            
+            {/* Step 2 - เลือกรุ่น (เสร็จแล้ว - สีเขียว) */}
+            <div className="flex items-center">
+              <div className="bg-[#128C3B] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-lg">
+                ✓
+              </div>
+              <span className="ml-2 font-semibold text-[#128C3B] text-sm md:text-base">
+                เลือกรุ่น
+              </span>
+            </div>
+            
+            {/* Line 2-3 (สีเขียว) */}
+            <div className="flex-1 h-1 bg-[#128C3B] rounded mx-2"></div>
+            
+            {/* Step 3 - เลือกแผน (กำลังทำ - สีเขียว) */}
+            <div className="flex items-center">
+              <div className="bg-[#128C3B] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-lg ring-4 ring-[#128C3B]/30">
+                3
+              </div>
+              <span className="ml-2 font-semibold text-[#128C3B] text-sm md:text-base">
+                เลือกแผน
+              </span>
+            </div>
           </div>
 
           {/* ข้อมูลรถที่เลือก */}
@@ -88,15 +127,22 @@ export default function InsuranceList() {
             </div>
           ) : plans.length > 0 ? (
             <>
+
               {/* รายการแผนประกัน */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                {plans.map((p) => (
+                {plans.map((p, index) => (
                   <div
                     key={p.id}
                     className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 overflow-hidden"
                   >
                     {/* Header ของการ์ด */}
-                    <div className="bg-gradient-to-r from-[#128C3B] to-[#0f7330] text-white p-5">
+                    <div className="bg-gradient-to-r from-[#128C3B] to-[#0f7330] text-white p-5 relative">
+                      {/* Badge แนะนำ (ถ้าเป็นแผนแรก) */}
+                      {index === 0 && (
+                        <div className="absolute top-2 right-2 bg-yellow-400 text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
+                          ⭐ แนะนำ
+                        </div>
+                      )}
                       <h3 className="text-2xl font-bold mb-2">{p.name}</h3>
                       <div className="flex items-baseline">
                         <span className="text-4xl font-bold">
