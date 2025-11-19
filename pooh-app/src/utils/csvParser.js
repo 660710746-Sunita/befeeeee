@@ -14,7 +14,7 @@ const parseCSV = (csvText) => {
 };
 
 // รวมข้อมูล CSV ทั้งหมด
-export const getAllInsuranceData = async () => {
+/*export const getAllInsuranceData = async () => {
   try {
     const response1 = await fetch('/data/Insurance_plan2+.csv');
     const response2 = await fetch('/data/Insurance_plan3.csv');
@@ -33,7 +33,28 @@ export const getAllInsuranceData = async () => {
     console.error('Error loading CSV data:', error);
     return [];
   }
+};*/
+export const getAllInsuranceData = async () => {
+  try {
+    const response1 = await fetch('/data/Insurance_plan2+.csv');
+    const response2 = await fetch('/data/Insurance_plan3.csv');
+    const response3 = await fetch('/data/Insurance_plan3+.csv');
+    
+    const csv1 = await response1.text();
+    const csv2 = await response2.text();
+    const csv3 = await response3.text();
+    
+    const data1 = (await parseCSV(csv1)).map(row => ({ ...row, INS_TYPE: "2+" }));
+    const data2 = (await parseCSV(csv2)).map(row => ({ ...row, INS_TYPE: "3" }));
+    const data3 = (await parseCSV(csv3)).map(row => ({ ...row, INS_TYPE: "3+" }));
+    
+    return [...data1, ...data2, ...data3];
+  } catch (error) {
+    console.error('Error loading CSV data:', error);
+    return [];
+  }
 };
+
 
 // ดึง CAR_MODEL_CODE ตามที่เลือก CAR_BRAND_CODE
 export const getModelsByBrand = async (brandCode) => {
@@ -114,6 +135,9 @@ export const getInsurancePlansBySelection = async (brandCode, modelCode, subMode
       price: parseFloat(row.GROSS_PREMIUM) || 0,
       sumInsured: parseFloat(row.SUM_INSURED) || 0,
       packageCode: row.SUB_PACKAGE_CODE,
+
+      insuranceType: row.INS_TYPE,   // ⭐ เพิ่มตรงนี้
+      
       original: row // เก็บข้อมูลเดิมไว้เผื่อต้องใช้ในภายหลัง
     }))
     // ลบ duplicates โดยเก็บเฉพาะแผนที่ไม่ซ้ำ
