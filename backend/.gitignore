@@ -7,13 +7,13 @@
 *.dylib
 
 # Test binary, built with `go test -c`
-*.test
+# *.test
 
 # Output of the go coverage tool
 *.out
 
 # Go workspace file
-go.work
+# go.work
 
 # Dependency directories
 vendor/
@@ -27,8 +27,8 @@ vendor/
 .DS_Store
 
 # Environment variables
-.env
-.env.local
+# .env
+# .env.local
 
 # Application binaries
-main
+# main
