@@ -34,9 +34,9 @@ export default function Home() {
           
           {/* Header Section */}
           <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center bg-gradient-to-r from-[#128C3B] to-[#0f7330] rounded-full w-32 h-32 mb-6 shadow-2xl transform hover:scale-110 transition duration-300">
-              <span className="text-7xl">🚗</span>
-            </div>
+            <div className="inline-flex items-center justify-center rounded-full w-32 h-32 mb-6 transform hover:scale-110 transition duration-300">
+            <span className="text-9xl">🚗</span>
+          </div>
             
             <h1 className="text-5xl md:text-6xl font-bold text-[#128C3B] mb-4">
               เลือกยี่ห้อรถ
@@ -101,26 +101,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Statistics Section */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-[#128C3B]">
-              <div className="text-4xl mb-3">🏆</div>
-              <div className="text-3xl font-bold text-[#128C3B] mb-2">17+</div>
-              <p className="text-gray-600">ยี่ห้อรถชั้นนำ</p>
-            </div>
-            
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-[#128C3B]">
-              <div className="text-4xl mb-3">⚡</div>
-              <div className="text-3xl font-bold text-[#128C3B] mb-2">3 นาที</div>
-              <p className="text-gray-600">คำนวณเบี้ยได้ทันที</p>
-            </div>
-            
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-[#128C3B]">
-              <div className="text-4xl mb-3">💰</div>
-              <div className="text-3xl font-bold text-[#128C3B] mb-2">คุ้มค่า</div>
-              <p className="text-gray-600">ราคาประหยัด ครบครัน</p>
-            </div>
-          </div>
 
         </div>
       </div>
