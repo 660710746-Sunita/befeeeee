@@ -98,21 +98,33 @@ export default function InsuranceDetail() {
                         <h3 className="text-2xl font-bold text-blue-600 mb-4">👥 คุ้มครองบุคคลภายนอก</h3>
                         <div className="space-y-3">
                             <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                <p className="text-gray-700 font-semibold mb-1">
+                                    ความเสียหายต่อชีวิตร่างกายบุคคลภายนอก
+                                </p>
                                 <p className="text-xl font-bold text-blue-600">
                                     {detail.thirdParty.person.toLocaleString()} บาท/คน
                                 </p>
                             </div>
                             <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                <p className="text-gray-700 font-semibold mb-1">
+                                    ความเสียหายต่อชีวิตร่างกายบุคคลภายนอกต่อครั้ง
+                                </p>
                                 <p className="text-xl font-bold text-blue-600">
                                     {detail.thirdParty.accident.toLocaleString()} บาท/ครั้ง
                                 </p>
                             </div>
                             <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                <p className="text-gray-700 font-semibold mb-1">
+                                    ทรัพย์สินบุคคลภายนอกต่อครั้ง
+                                </p>
                                 <p className="text-xl font-bold text-blue-600">
                                     {detail.thirdParty.property.toLocaleString()} บาท/ครั้ง
                                 </p>
                             </div>
                             <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                <p className="text-gray-700 font-semibold mb-1">
+                                    ค่าเสียหายส่วนแรก
+                                </p>
                                 <p className="text-xl font-bold text-blue-600">
                                     {detail.thirdParty.deductible}
                                 </p>
@@ -125,22 +137,26 @@ export default function InsuranceDetail() {
                         <h3 className="text-2xl font-bold text-purple-600 mb-4">➕ คุ้มครองเพิ่มเติม</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                                <p className="text-gray-600 mb-1 text-sm">อุบัติเหตุส่วนบุคคล</p>
                                 <p className="text-lg font-bold text-purple-600">
                                     {detail.extra.personalAccident}
                                 </p>
                             </div>
                             <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                                <p className="text-gray-600 mb-1 text-sm">ค่ารักษาพยาบาล</p>
                                 <p className="text-lg font-bold text-purple-600">
                                     {detail.extra.medicalExpense}
                                 </p>
                             </div>
                             <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                                <p className="text-gray-600 mb-1 text-sm">ประกันตัวผู้ขับขี่</p>
                                 <p className="text-lg font-bold text-purple-600">
                                     {detail.extra.bail}
                                 </p>
                             </div>
                         </div>
                     </div>
+
                     {/* บริการเสริม */}
                     <div className="bg-white rounded-xl shadow-xl p-6 mb-6 border-l-4 border-orange-500">
                         <h3 className="text-2xl font-bold text-orange-600 mb-4">
@@ -167,6 +183,22 @@ export default function InsuranceDetail() {
                                 <p className="text-gray-500 text-lg">ไม่มีบริการเสริม</p>
                             </div>
                         )}
+                    </div>
+
+                    {/* Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="sm:w-1/3 px-8 py-4 bg-gray-600 hover:bg-gray-700 text-white font-bold rounded-lg transition duration-300 transform hover:scale-105 shadow-lg"
+                        >
+                            ← ย้อนกลับ
+                        </button>
+                        <button
+                            onClick={() => navigate("/info")}
+                            className="sm:w-2/3 px-8 py-4 bg-[#128C3B] hover:bg-[#0f7330] text-white font-bold rounded-lg transition duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg"
+                        >
+                            ✓ เลือกแผนนี้
+                        </button>
                     </div>
 
                 </div>
