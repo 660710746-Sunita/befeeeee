@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useCar } from "../context/CarContext";
 import { CarBrandCard } from "../components/CarBrandCard";
+import Layout from "../components/Layout";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -27,129 +28,102 @@ export default function Home() {
   ];
 
   return (
-    <div style={{ 
-      padding: 20, 
-      maxWidth: 900, 
-      margin: "0 auto",
-      backgroundColor: "#128C3B",
-      minHeight: "100vh"
-    }}>
-      {/* ⭐ แถบโลโก้ด้านบนสุด */}
-      <div style={{
-        backgroundColor: "white",
-        borderRadius: 15,
-        padding: "25px 35px",
-        marginBottom: 30,
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-        display: "flex",
-        alignItems: "center",
-        gap: 25,
-        borderLeft: "6px solid #128C3B"
-      }}>
-        {/* โลโก้รูปจริง */}
-        <img 
-          src="/assets/Thaivivat.jpg" 
-          alt="Thaivivat Insurance"
-          style={{
-            height: 80,
-            width: "auto",
-            objectFit: "contain"
-          }}
-        />
-        
-        {/* เส้นแบ่ง */}
-        <div style={{
-          width: 3,
-          height: 60,
-          backgroundColor: "#e0e0e0",
-          borderRadius: 2
-        }}></div>
-        
-        {/* ข้อความ */}
-        <div>
-          <h2 style={{
-            fontSize: 36,
-            fontWeight: "bold",
-            color: "#128C3B",
-            margin: 0,
-            letterSpacing: "0.5px",
-            lineHeight: 1.2
-          }}>
-            ประกันภัยไทยวิวัฒน์
-          </h2>
-          <p style={{
-            fontSize: 16,
-            color: "#666",
-            margin: "5px 0 0 0",
-            fontWeight: 500
-          }}>
-            Thaivivat Insurance
-          </p>
-        </div>
-      </div>
+    <Layout>
+      <div className="bg-gradient-to-b from-green-50 to-white min-h-screen py-8 px-4">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Header Section */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center justify-center bg-gradient-to-r from-[#128C3B] to-[#0f7330] rounded-full w-32 h-32 mb-6 shadow-2xl transform hover:scale-110 transition duration-300">
+              <span className="text-7xl">🚗</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl font-bold text-[#128C3B] mb-4">
+              เลือกยี่ห้อรถ
+            </h1>
+            
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              คลิกที่การ์ดเพื่อเลือกยี่ห้อรถที่คุณต้องการทำประกันภัย
+            </p>
 
-      {/* ⭐ Header พร้อมวงรี */}
-      <div style={{
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: "40px 30px",
-        marginBottom: 30,
-        boxShadow: "0 8px 16px rgba(0, 0, 0, 0.15)",
-        textAlign: "center",
-        border: "3px solid #128C3B"
-      }}>
-        <div style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#128C3B",
-          borderRadius: "50%",
-          width: 180,
-          height: 120,
-          marginBottom: 20
-        }}>
-          <span style={{ fontSize: 50 }}>🚗</span>
+            {/* Progress Indicator */}
+            <div className="flex items-center justify-center gap-3 mt-8 max-w-md mx-auto">
+              <div className="flex items-center">
+                <div className="bg-[#128C3B] text-white rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-lg">
+                  1
+                </div>
+                <span className="ml-2 font-semibold text-[#128C3B]">เลือกยี่ห้อ</span>
+              </div>
+              <div className="flex-1 h-1 bg-gray-300 rounded"></div>
+              <div className="flex items-center">
+                <div className="bg-gray-300 text-gray-600 rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                  2
+                </div>
+                <span className="ml-2 text-gray-500">เลือกรุ่น</span>
+              </div>
+              <div className="flex-1 h-1 bg-gray-300 rounded"></div>
+              <div className="flex items-center">
+                <div className="bg-gray-300 text-gray-600 rounded-full w-10 h-10 flex items-center justify-center font-bold">
+                  3
+                </div>
+                <span className="ml-2 text-gray-500">เลือกแผน</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Info Card */}
+          <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-10 max-w-4xl mx-auto">
+            <div className="flex items-center gap-4">
+              <div className="text-4xl">💡</div>
+              <div>
+                <h3 className="font-bold text-blue-800 text-lg mb-1">
+                  คำแนะนำ
+                </h3>
+                <p className="text-blue-700">
+                  เลือกยี่ห้อรถของคุณจากรายการด้านล่าง จากนั้นระบบจะนำคุณไปเลือกรุ่นรถและคำนวณเบี้ยประกันโดยอัตโนมัติ
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Brand Grid - 3 columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {brands.map((b) => (
+              <CarBrandCard
+                key={b.code}
+                brand={b.name}
+                img={b.img}
+                onSelect={() => {
+                  setBrand(b.code);
+                  navigate("/select");
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Statistics Section */}
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-[#128C3B]">
+              <div className="text-4xl mb-3">🏆</div>
+              <div className="text-3xl font-bold text-[#128C3B] mb-2">17+</div>
+              <p className="text-gray-600">ยี่ห้อรถชั้นนำ</p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-[#128C3B]">
+              <div className="text-4xl mb-3">⚡</div>
+              <div className="text-3xl font-bold text-[#128C3B] mb-2">3 นาที</div>
+              <p className="text-gray-600">คำนวณเบี้ยได้ทันที</p>
+            </div>
+            
+            <div className="bg-white rounded-xl shadow-lg p-6 text-center border-t-4 border-[#128C3B]">
+              <div className="text-4xl mb-3">💰</div>
+              <div className="text-3xl font-bold text-[#128C3B] mb-2">คุ้มค่า</div>
+              <p className="text-gray-600">ราคาประหยัด ครบครัน</p>
+            </div>
+          </div>
+
         </div>
-        
-        <h1 style={{ 
-          fontSize: 56,
-          fontWeight: "bold",
-          color: "#128C3B",
-          margin: "10px 0",
-          letterSpacing: "-1px"
-        }}>
-          เลือกยี่ห้อรถ
-        </h1>
-        
-        <p style={{
-          color: "#666",
-          fontSize: 20,
-          marginTop: 15,
-          marginBottom: 0,
-          fontWeight: 500
-        }}>
-          คลิกที่การ์ดเพื่อเลือกยี่ห้อรถที่คุณต้องการ
-        </p>
       </div>
-      
-      {/* Grid สำหรับแสดงการ์ด - แถวละ 3 รูป */}
-      <div style={{ 
-        display: "grid", 
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: 20
-      }}>
-        {brands.map((b) => (
-          <CarBrandCard
-            key={b.code}
-            brand={b.name}
-            img={b.img}
-            onSelect={() => {
-              setBrand(b.code);
-              navigate("/select");
-            }}
-          />
-        ))}
-      </div>
-    </div>
+    </Layout>
   );
 }
