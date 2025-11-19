@@ -129,17 +129,28 @@ export const getInsurancePlansBySelection = async (brandCode, modelCode, subMode
       row.CAR_SUBMODEL_CODE?.trim() === subModelCode?.trim() &&
       row.CAR_YEAR?.toString().trim() === year?.toString().trim()
     )
-    .map((row, index) => ({
-      id: index,
-      name: row.SUB_PACKAGE_NAME || 'Unknown Plan',
-      price: parseFloat(row.GROSS_PREMIUM) || 0,
-      sumInsured: parseFloat(row.SUM_INSURED) || 0,
-      packageCode: row.SUB_PACKAGE_CODE,
-
-      insuranceType: row.INS_TYPE,   // ⭐ เพิ่มตรงนี้
+    .map((row, index) => {
+      // กำหนดชื่อแผนตามประเภท
+      let displayName = row.SUB_PACKAGE_NAME || 'Unknown Plan';
       
-      original: row // เก็บข้อมูลเดิมไว้เผื่อต้องใช้ในภายหลัง
-    }))
+      if (row.INS_TYPE === "2+") {
+        displayName = "เบี้ยประกันชั้น 2+";
+      } else if (row.INS_TYPE === "3") {
+        displayName = "เบี้ยประกันชั้น 3";
+      } else if (row.INS_TYPE === "3+") {
+        displayName = "เบี้ยประกันชั้น 3+";
+      }
+      
+      return {
+        id: index,
+        name: displayName,
+        price: parseFloat(row.GROSS_PREMIUM) || 0,
+        sumInsured: parseFloat(row.SUM_INSURED) || 0,
+        packageCode: row.SUB_PACKAGE_CODE,
+        insuranceType: row.INS_TYPE,
+        original: row // เก็บข้อมูลเดิมไว้เผื่อต้องใช้ในภายหลัง
+      };
+    })
     // ลบ duplicates โดยเก็บเฉพาะแผนที่ไม่ซ้ำ
     .filter((plan, index, self) => 
       index === self.findIndex(p => p.name === plan.name && p.price === plan.price)
