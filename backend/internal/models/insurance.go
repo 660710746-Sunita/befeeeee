@@ -11,7 +11,7 @@ type InsuranceSelection struct {
 	CarYear        int       `json:"car_year" db:"car_year"`
 	InsuranceType  string    `json:"insurance_type" db:"insurance_type"` // "2+", "3", "3+"
 	Price          float64   `json:"price" db:"price"`
-	SumInsured     float64   `json:"sum_insured" db:"sum_insured"`
+	SumInsured     *float64   `json:"sum_insured" db:"sum_insured"`
 	CreatedAt      time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt      time.Time `json:"updated_at" db:"updated_at"`
 }
@@ -24,7 +24,7 @@ type CreateInsuranceSelectionRequest struct {
 	CarYear         int     `json:"car_year" binding:"required"`
 	InsuranceType   string  `json:"insurance_type" binding:"required"` // "2+", "3", "3+"
 	Price           float64 `json:"price" binding:"required"`
-	SumInsured      float64 `json:"sum_insured" binding:"required"`
+	SumInsured      *float64 `json:"sum_insured" binding:"required"`
 }
 
 // ErrorResponse สำหรับการตอบกลับ error
