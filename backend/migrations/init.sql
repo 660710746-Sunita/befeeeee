@@ -1,6 +1,8 @@
 -- Create insurance_selections table
 CREATE TABLE IF NOT EXISTS insurance_selections (
     id SERIAL PRIMARY KEY,
+    
+    -- Existing fields
     car_brand_code VARCHAR(50) NOT NULL,
     car_model_code VARCHAR(50) NOT NULL,
     car_submodel_code VARCHAR(100) NOT NULL,
@@ -8,6 +10,16 @@ CREATE TABLE IF NOT EXISTS insurance_selections (
     insurance_type VARCHAR(10) NOT NULL CHECK (insurance_type IN ('2+', '3', '3+')),
     price NUMERIC(10, 2) NOT NULL,
     sum_insured NUMERIC(12, 2) NOT NULL,
+
+    -- NEW: Customer info fields
+    citizen_id VARCHAR(20),
+    title VARCHAR(20),
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    birth_date DATE,
+    email VARCHAR(255),
+    phone VARCHAR(20),
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
