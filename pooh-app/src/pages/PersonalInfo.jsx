@@ -229,6 +229,7 @@ export default function PersonalInfo() {
             </div>
 
             {/* Phone */}
+            {/* Phone */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm">
                 เบอร์โทรศัพท์ *
