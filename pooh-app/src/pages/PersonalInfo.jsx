@@ -29,9 +29,6 @@ export default function PersonalInfo() {
     setError("");
 
     try {
-      /*const birthYearAD = parseInt(formData.birthYear); // ค.ศ.
-      const birthMonth = String(formData.birthMonth).padStart(2, "0");
-      const birthDay = String(formData.birthDay).padStart(2, "0");*/
 
       const response = await fetch("http://localhost:8080/api/insurance-selection", {
         method: "POST",
