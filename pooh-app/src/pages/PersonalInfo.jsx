@@ -197,11 +197,11 @@ export default function PersonalInfo() {
                 อีเมล <span className="text-red-500">*</span>
               </label>
               <input
-                type="email"
-                name="email"
-                value={formData.email}
+                type="gmail"
+                name="gmail"
+                value={formData.gmail}
                 onChange={handleChange}
-                placeholder="example@email.com"
+                placeholder="example@gmail.com"
                 required
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-[#128C3B] focus:border-[#128C3B] outline-none transition"
               />
