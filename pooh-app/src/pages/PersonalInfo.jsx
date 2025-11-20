@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 
 export default function PersonalInfo() {
   const navigate = useNavigate();
-  const { selectedPlan } = useCar();
+  const { brand, model, subModel, year, selectedPlan } = useCar();
   
   const [formData, setFormData] = useState({
     idCard: "",
@@ -20,12 +20,49 @@ export default function PersonalInfo() {
   });
 
   const [showSuccess, setShowSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("ข้อมูลที่กรอก:", formData);
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 3000);
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("http://localhost:8080/api/insurance-selection", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          car_brand_code: brand,
+          car_model_code: model,
+          car_submodel_code: subModel,
+          car_year: parseInt(year),
+          insurance_type: selectedPlan?.insuranceType || "3+",
+          price: selectedPlan?.price || 0,
+          sum_insured: selectedPlan?.sumInsured || 0,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("ไม่สามารถบันทึกข้อมูลได้");
+      }
+
+      const data = await response.json();
+      console.log("✓ ข้อมูลที่บันทึกสำเร็จ:", data);
+
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+        navigate("/");
+      }, 2000);
+    } catch (err) {
+      setError(err.message || "เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+      console.error("Error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -48,7 +85,6 @@ export default function PersonalInfo() {
     <Layout>
       <div className="container mx-auto py-8 px-4">
         <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-xl p-8 border-t-4 border-[#128C3B]">
-          {/* Header */}
           <div className="mb-8 pb-6 border-b-2 border-gray-200">
             <h1 className="text-3xl font-bold text-[#128C3B] mb-2">
               ข้อมูลเจ้าของรถ
@@ -57,26 +93,35 @@ export default function PersonalInfo() {
               <div className="bg-green-50 p-3 rounded-lg mt-3">
                 <p className="text-gray-700">
                   แผนที่เลือก: <span className="font-bold text-[#128C3B]">{selectedPlan.name}</span>
+                  <span className="ml-2 text-[#128C3B]">({selectedPlan.price.toLocaleString()} บาท)</span>
                 </p>
               </div>
             )}
           </div>
 
-          {/* Success Alert */}
           {showSuccess && (
             <div className="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded animate-pulse">
               <div className="flex items-center">
                 <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
                 </svg>
-                <span className="font-semibold">ส่งข้อมูลสำเร็จ!</span>
+                <span className="font-semibold">บันทึกข้อมูลสำเร็จ! 🎉</span>
               </div>
             </div>
           )}
 
-          {/* Form */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded">
+              <div className="flex items-center">
+                <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd"/>
+                </svg>
+                <span className="font-semibold">{error}</span>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* เลขบัตรประชาชน */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm">
                 เลขบัตรประชาชน <span className="text-red-500">*</span>
@@ -93,7 +138,6 @@ export default function PersonalInfo() {
               />
             </div>
 
-            {/* คำนำหน้า */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm">
                 คำนำหน้า <span className="text-red-500">*</span>
@@ -112,7 +156,6 @@ export default function PersonalInfo() {
               </select>
             </div>
 
-            {/* ชื่อ - นามสกุล */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-gray-700 font-semibold mb-2 text-sm">
@@ -144,7 +187,6 @@ export default function PersonalInfo() {
               </div>
             </div>
 
-            {/* วันเดือนปีเกิด */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm">
                 วันเดือนปีเกิด <span className="text-red-500">*</span>
@@ -191,7 +233,6 @@ export default function PersonalInfo() {
               </div>
             </div>
 
-            {/* อีเมล */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm">
                 อีเมล <span className="text-red-500">*</span>
@@ -207,7 +248,6 @@ export default function PersonalInfo() {
               />
             </div>
 
-            {/* เบอร์โทรศัพท์ */}
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm">
                 เบอร์โทรศัพท์ <span className="text-red-500">*</span>
@@ -224,7 +264,6 @@ export default function PersonalInfo() {
               />
             </div>
 
-            {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
                 type="button"
@@ -235,9 +274,14 @@ export default function PersonalInfo() {
               </button>
               <button
                 type="submit"
-                className="sm:w-2/3 bg-[#128C3B] hover:bg-[#0f7330] text-white font-bold py-4 px-6 rounded-lg transition duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg"
+                disabled={loading}
+                className={`sm:w-2/3 text-white font-bold py-4 px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg ${
+                  loading 
+                    ? "bg-gray-400 cursor-not-allowed" 
+                    : "bg-[#128C3B] hover:bg-[#0f7330] hover:shadow-xl"
+                }`}
               >
-                ✓ ยืนยันข้อมูล
+                {loading ? "กำลังบันทึก..." : "✓ ยืนยันข้อมูล"}
               </button>
             </div>
           </form>
