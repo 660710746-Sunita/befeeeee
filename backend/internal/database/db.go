@@ -47,6 +47,13 @@ func (d *Database) InitializeDB() error {
 		insurance_type VARCHAR(10) NOT NULL,
 		price NUMERIC(10, 2) NOT NULL,
 		sum_insured NUMERIC(12, 2) NOT NULL,
+    owner_id_card VARCHAR(20),
+    owner_prefix VARCHAR(20),
+    owner_first_name VARCHAR(100),
+    owner_last_name VARCHAR(100),
+    owner_birthdate DATE,
+    owner_email VARCHAR(200),
+    owner_phone VARCHAR(20),
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 		updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);

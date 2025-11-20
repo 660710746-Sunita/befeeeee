@@ -12,6 +12,16 @@ CREATE TABLE IF NOT EXISTS insurance_selections (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Add new owner columns (moved outside CREATE TABLE)
+ALTER TABLE insurance_selections
+    ADD COLUMN IF NOT EXISTS owner_id_card VARCHAR(20),
+    ADD COLUMN IF NOT EXISTS owner_prefix VARCHAR(20),
+    ADD COLUMN IF NOT EXISTS owner_first_name VARCHAR(100),
+    ADD COLUMN IF NOT EXISTS owner_last_name VARCHAR(100),
+    ADD COLUMN IF NOT EXISTS owner_birthdate DATE,
+    ADD COLUMN IF NOT EXISTS owner_email VARCHAR(200),
+    ADD COLUMN IF NOT EXISTS owner_phone VARCHAR(20);
+
 -- Create indexes for better query performance
 CREATE INDEX IF NOT EXISTS idx_car_selection 
 ON insurance_selections(car_brand_code, car_model_code, car_year);
@@ -33,7 +43,7 @@ $$ language 'plpgsql';
 
 -- Create trigger for updated_at
 DROP TRIGGER IF EXISTS update_insurance_selections_updated_at ON insurance_selections;
-CREATE TRIGGER update_insurance_selections_updated_at BEFORE UPDATE
-    ON insurance_selections
-    FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_insurance_selections_updated_at
+BEFORE UPDATE ON insurance_selections
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
