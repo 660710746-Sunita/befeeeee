@@ -30,7 +30,30 @@ export default function PersonalInfo() {
 
     try {
 
-      const response = await fetch("http://localhost:8080/api/insurance-selection", {
+      /*const response = await fetch("http://localhost:8080/api/insurance-selection", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          car_brand_code: brand,
+          car_model_code: model,
+          car_submodel_code: subModel,
+          car_year: parseInt(year),
+          insurance_type: selectedPlan?.insuranceType || "3",
+          price: Number(selectedPlan?.price) || 0,
+          sum_insured: Number(selectedPlan?.sumInsured) || 0,
+
+          owner_id_card: formData.idCard,
+          owner_prefix: formData.prefix,
+          owner_first_name: formData.firstName,
+          owner_last_name: formData.lastName,
+          owner_birthdate: `${formData.birthYear}-${formData.birthMonth}-${formData.birthDay}`,
+          owner_email: formData.email,
+          owner_phone: formData.phone,
+        })
+      });*/
+        const response = await fetch("http://localhost:8080/api/insurance-selection", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
