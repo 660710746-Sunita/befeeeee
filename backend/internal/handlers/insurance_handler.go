@@ -5,7 +5,7 @@ import (
 	"insurance-backend/internal/models"
 	"net/http"
 	"strconv"
-
+	"log"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,13 +30,16 @@ func (h *InsuranceHandler) CreateInsuranceSelection(c *gin.Context) {
 		return
 	}
 
-	selection, err := h.repo.CreateInsuranceSelection(&req)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, models.ErrorResponse{
-			Error: err.Error(),
-		})
-		return
-	}
+selection, err := h.repo.CreateInsuranceSelection(&req)
+if err != nil {
+    // 👇 เพิ่มบรรทัดนี้ เพื่อ log error ใน terminal
+    log.Println("❌ Error creating insurance selection:", err)
+
+    c.JSON(http.StatusInternalServerError, models.ErrorResponse{
+        Error: err.Error(),
+    })
+    return
+}
 
 	c.JSON(http.StatusCreated, models.SuccessResponse{
 		Message: "Insurance selection created successfully",

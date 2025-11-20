@@ -27,15 +27,29 @@ func (r *InsuranceRepository) CreateInsuranceSelection(req *models.CreateInsuran
 		InsuranceType:   req.InsuranceType,
 		Price:           req.Price,
 		SumInsured:      req.SumInsured,
-		CreatedAt:       time.Now(),
-		UpdatedAt:       time.Now(),
+
+		// ⭐ ข้อมูลเจ้าของรถจาก React
+		OwnerIDCard:    req.OwnerIDCard,
+		OwnerPrefix:    req.OwnerPrefix,
+		OwnerFirstName: req.OwnerFirstName,
+		OwnerLastName:  req.OwnerLastName,
+		OwnerBirthdate: req.OwnerBirthdate,
+		OwnerEmail:     req.OwnerEmail,
+		OwnerPhone:     req.OwnerPhone,
+
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 	}
 
 	query := `
-		INSERT INTO insurance_selections 
-		(car_brand_code, car_model_code, car_submodel_code, car_year, insurance_type, price, sum_insured)
-		VALUES ($1, $2, $3, $4, $5, $6, $7)
-		RETURNING id, created_at, updated_at
+	INSERT INTO insurance_selections 
+	(car_brand_code, car_model_code, car_submodel_code, car_year, 
+	 insurance_type, price, sum_insured,
+	 owner_id_card, owner_prefix, owner_first_name, owner_last_name,
+	 owner_birthdate, owner_email, owner_phone)
+	VALUES ($1, $2, $3, $4, $5, $6, $7,
+			$8, $9, $10, $11, $12, $13, $14)
+	RETURNING id, created_at, updated_at
 	`
 
 	err := r.DB.QueryRow(
@@ -47,13 +61,22 @@ func (r *InsuranceRepository) CreateInsuranceSelection(req *models.CreateInsuran
 		selection.InsuranceType,
 		selection.Price,
 		selection.SumInsured,
+		selection.OwnerIDCard,
+		selection.OwnerPrefix,
+		selection.OwnerFirstName,
+		selection.OwnerLastName,
+		selection.OwnerBirthdate,
+		selection.OwnerEmail,
+		selection.OwnerPhone,
 	).Scan(&selection.ID, &selection.CreatedAt, &selection.UpdatedAt)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to create insurance selection: %w", err)
 	}
 
-	log.Printf("✓ Created insurance selection: ID=%d, Type=%s, Brand=%s", selection.ID, selection.InsuranceType, selection.CarBrandCode)
+	log.Printf("✓ Created insurance selection: ID=%d, Type=%s, Brand=%s",
+		selection.ID, selection.InsuranceType, selection.CarBrandCode)
+
 	return selection, nil
 }
 
@@ -62,8 +85,12 @@ func (r *InsuranceRepository) GetInsuranceSelection(id int) (*models.InsuranceSe
 	selection := &models.InsuranceSelection{}
 
 	query := `
-		SELECT id, car_brand_code, car_model_code, car_submodel_code, car_year, 
-		       insurance_type, price, sum_insured, created_at, updated_at
+		SELECT 
+			id, car_brand_code, car_model_code, car_submodel_code, car_year,
+			insurance_type, price, sum_insured,
+			owner_id_card, owner_prefix, owner_first_name, owner_last_name,
+			owner_birthdate, owner_email, owner_phone,
+			created_at, updated_at
 		FROM insurance_selections
 		WHERE id = $1
 	`
@@ -77,6 +104,13 @@ func (r *InsuranceRepository) GetInsuranceSelection(id int) (*models.InsuranceSe
 		&selection.InsuranceType,
 		&selection.Price,
 		&selection.SumInsured,
+		&selection.OwnerIDCard,
+		&selection.OwnerPrefix,
+		&selection.OwnerFirstName,
+		&selection.OwnerLastName,
+		&selection.OwnerBirthdate,
+		&selection.OwnerEmail,
+		&selection.OwnerPhone,
 		&selection.CreatedAt,
 		&selection.UpdatedAt,
 	)
@@ -88,17 +122,22 @@ func (r *InsuranceRepository) GetInsuranceSelection(id int) (*models.InsuranceSe
 	return selection, nil
 }
 
+
 // GetAllInsuranceSelections ดึงข้อมูลการเลือกทั้งหมด
 func (r *InsuranceRepository) GetAllInsuranceSelections(limit, offset int) ([]models.InsuranceSelection, error) {
 	selections := []models.InsuranceSelection{}
 
 	query := `
-		SELECT id, car_brand_code, car_model_code, car_submodel_code, car_year, 
-		       insurance_type, price, sum_insured, created_at, updated_at
-		FROM insurance_selections
-		ORDER BY created_at DESC
-		LIMIT $1 OFFSET $2
-	`
+    SELECT id, car_brand_code, car_model_code, car_submodel_code, car_year,
+           insurance_type, price, sum_insured,
+           owner_id_card, owner_prefix, owner_first_name, owner_last_name,
+           owner_birthdate, owner_email, owner_phone,
+           created_at, updated_at
+    FROM insurance_selections
+    ORDER BY created_at DESC
+    LIMIT $1 OFFSET $2
+`
+
 
 	rows, err := r.DB.Query(query, limit, offset)
 	if err != nil {
@@ -108,18 +147,27 @@ func (r *InsuranceRepository) GetAllInsuranceSelections(limit, offset int) ([]mo
 
 	for rows.Next() {
 		var selection models.InsuranceSelection
-		err := rows.Scan(
-			&selection.ID,
-			&selection.CarBrandCode,
-			&selection.CarModelCode,
-			&selection.CarSubmodelCode,
-			&selection.CarYear,
-			&selection.InsuranceType,
-			&selection.Price,
-			&selection.SumInsured,
-			&selection.CreatedAt,
-			&selection.UpdatedAt,
-		)
+err := rows.Scan(
+    &selection.ID,
+    &selection.CarBrandCode,
+    &selection.CarModelCode,
+    &selection.CarSubmodelCode,
+    &selection.CarYear,
+    &selection.InsuranceType,
+    &selection.Price,
+    &selection.SumInsured,
+
+    &selection.OwnerIDCard,
+    &selection.OwnerPrefix,
+    &selection.OwnerFirstName,
+    &selection.OwnerLastName,
+    &selection.OwnerBirthdate,
+    &selection.OwnerEmail,
+    &selection.OwnerPhone,
+
+    &selection.CreatedAt,
+    &selection.UpdatedAt,
+)
 		if err != nil {
 			return nil, fmt.Errorf("failed to scan insurance selection: %w", err)
 		}
@@ -134,8 +182,12 @@ func (r *InsuranceRepository) GetInsuranceSelectionsByBrand(brandCode string) ([
 	selections := []models.InsuranceSelection{}
 
 	query := `
-		SELECT id, car_brand_code, car_model_code, car_submodel_code, car_year, 
-		       insurance_type, price, sum_insured, created_at, updated_at
+		SELECT 
+			id, car_brand_code, car_model_code, car_submodel_code, car_year,
+			insurance_type, price, sum_insured,
+			owner_id_card, owner_prefix, owner_first_name, owner_last_name,
+			owner_birthdate, owner_email, owner_phone,
+			created_at, updated_at
 		FROM insurance_selections
 		WHERE car_brand_code = $1
 		ORDER BY created_at DESC
@@ -158,6 +210,13 @@ func (r *InsuranceRepository) GetInsuranceSelectionsByBrand(brandCode string) ([
 			&selection.InsuranceType,
 			&selection.Price,
 			&selection.SumInsured,
+			&selection.OwnerIDCard,
+			&selection.OwnerPrefix,
+			&selection.OwnerFirstName,
+			&selection.OwnerLastName,
+			&selection.OwnerBirthdate,
+			&selection.OwnerEmail,
+			&selection.OwnerPhone,
 			&selection.CreatedAt,
 			&selection.UpdatedAt,
 		)
