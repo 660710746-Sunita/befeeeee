@@ -8,19 +8,19 @@ import (
 	_ "github.com/lib/pq"
 )
 
-// Database เก็บการเชื่อมต่อ
+
 type Database struct {
 	DB *sql.DB
 }
 
-// NewDatabase สร้าง database connection ใหม่
+
 func NewDatabase(dbURL string) (*Database, error) {
 	db, err := sql.Open("postgres", dbURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to open database: %w", err)
 	}
 
-	// ตรวจสอบการเชื่อมต่อ
+
 	if err := db.Ping(); err != nil {
 		return nil, fmt.Errorf("failed to ping database: %w", err)
 	}
@@ -30,12 +30,12 @@ func NewDatabase(dbURL string) (*Database, error) {
 	return &Database{DB: db}, nil
 }
 
-// Close ปิดการเชื่อมต่อ
+
 func (d *Database) Close() error {
 	return d.DB.Close()
 }
 
-// InitializeDB สร้าง tables
+
 func (d *Database) InitializeDB() error {
 	schema := `
 	CREATE TABLE IF NOT EXISTS insurance_selections (
