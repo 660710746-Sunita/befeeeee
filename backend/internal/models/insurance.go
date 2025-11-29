@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-// InsuranceSelection แสดงการเลือกประกัน
+
 type InsuranceSelection struct {
 	ID               int       `json:"id" db:"id"`
 	CarBrandCode     string    `json:"car_brand_code" db:"car_brand_code"`
@@ -13,7 +13,7 @@ type InsuranceSelection struct {
 	Price            float64   `json:"price" db:"price"`
 	SumInsured       float64   `json:"sum_insured" db:"sum_insured"`
 
-	// 👇👇 เพิ่มฟิลด์ข้อมูลเจ้าของรถ
+
 	OwnerIDCard      string    `json:"owner_id_card" db:"owner_id_card"`
 	OwnerPrefix      string    `json:"owner_prefix" db:"owner_prefix"`
 	OwnerFirstName   string    `json:"owner_first_name" db:"owner_first_name"`
@@ -26,7 +26,7 @@ type InsuranceSelection struct {
 	UpdatedAt        time.Time `json:"updated_at" db:"updated_at"`
 }
 
-// CreateInsuranceSelectionRequest ลิเควสต์สำหรับสร้างการเลือก
+
 type CreateInsuranceSelectionRequest struct {
     CarBrandCode     string  `json:"car_brand_code" binding:"required"`
     CarModelCode     string  `json:"car_model_code" binding:"required"`
@@ -48,12 +48,12 @@ type CreateInsuranceSelectionRequest struct {
 }
 
 
-// ErrorResponse สำหรับการตอบกลับ error
+
 type ErrorResponse struct {
 	Error string `json:"error"`
 }
 
-// SuccessResponse สำหรับการตอบกลับสำเร็จ
+
 type SuccessResponse struct {
 	Message string              `json:"message"`
 	Data    *InsuranceSelection `json:"data"`

@@ -7,17 +7,17 @@ import (
 	"time"
 )
 
-// InsuranceRepository ควบคุมการจัดการข้อมูลประกัน
+
 type InsuranceRepository struct {
 	*Database
 }
 
-// NewInsuranceRepository สร้าง repository ใหม่
+
 func NewInsuranceRepository(db *Database) *InsuranceRepository {
 	return &InsuranceRepository{Database: db}
 }
 
-// CreateInsuranceSelection สร้างการเลือกประกันใหม่
+
 func (r *InsuranceRepository) CreateInsuranceSelection(req *models.CreateInsuranceSelectionRequest) (*models.InsuranceSelection, error) {
 	selection := &models.InsuranceSelection{
 		CarBrandCode:    req.CarBrandCode,
@@ -80,7 +80,7 @@ func (r *InsuranceRepository) CreateInsuranceSelection(req *models.CreateInsuran
 	return selection, nil
 }
 
-// GetInsuranceSelection ดึงข้อมูลการเลือก
+
 func (r *InsuranceRepository) GetInsuranceSelection(id int) (*models.InsuranceSelection, error) {
 	selection := &models.InsuranceSelection{}
 
@@ -123,7 +123,7 @@ func (r *InsuranceRepository) GetInsuranceSelection(id int) (*models.InsuranceSe
 }
 
 
-// GetAllInsuranceSelections ดึงข้อมูลการเลือกทั้งหมด
+//all
 func (r *InsuranceRepository) GetAllInsuranceSelections(limit, offset int) ([]models.InsuranceSelection, error) {
 	selections := []models.InsuranceSelection{}
 
@@ -177,7 +177,7 @@ err := rows.Scan(
 	return selections, nil
 }
 
-// GetInsuranceSelectionsByBrand ดึงข้อมูลการเลือกตามยี่ห้อ
+//Bybrand
 func (r *InsuranceRepository) GetInsuranceSelectionsByBrand(brandCode string) ([]models.InsuranceSelection, error) {
 	selections := []models.InsuranceSelection{}
 
@@ -229,7 +229,7 @@ func (r *InsuranceRepository) GetInsuranceSelectionsByBrand(brandCode string) ([
 	return selections, nil
 }
 
-// UpdateInsuranceSelection อัปเดตการเลือก
+//update
 func (r *InsuranceRepository) UpdateInsuranceSelection(id int, req *models.CreateInsuranceSelectionRequest) (*models.InsuranceSelection, error) {
 	query := `
 		UPDATE insurance_selections
@@ -272,7 +272,7 @@ func (r *InsuranceRepository) UpdateInsuranceSelection(id int, req *models.Creat
 	return selection, nil
 }
 
-// DeleteInsuranceSelection ลบการเลือก
+//del
 func (r *InsuranceRepository) DeleteInsuranceSelection(id int) error {
 	query := `DELETE FROM insurance_selections WHERE id = $1`
 
