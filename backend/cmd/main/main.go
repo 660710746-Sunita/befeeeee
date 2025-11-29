@@ -17,7 +17,7 @@ func main() {
 	gin.SetMode(gin.DebugMode)
 	router := gin.Default()
 
-	// ✅ CORS ที่ถูกต้อง 100%
+
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000", "http://127.0.0.1:3000"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -27,7 +27,7 @@ func main() {
 		MaxAge:           12 * time.Hour,
 	}))
 
-	// 🔗 DB
+	//db
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
 		dbURL = "postgres://postgres:password@localhost:5432/insurance_db?sslmode=disable"
@@ -46,7 +46,7 @@ func main() {
 	insuranceRepo := database.NewInsuranceRepository(db)
 	insuranceHandler := handlers.NewInsuranceHandler(insuranceRepo)
 
-	// Routes
+
 	router.GET("/api/health", insuranceHandler.HealthCheck)
 	router.POST("/api/insurance-selection", insuranceHandler.CreateInsuranceSelection)
 	router.GET("/api/insurance-selection/:id", insuranceHandler.GetInsuranceSelection)
@@ -55,7 +55,7 @@ func main() {
 	router.PUT("/api/insurance-selection/:id", insuranceHandler.UpdateInsuranceSelection)
 	router.DELETE("/api/insurance-selection/:id", insuranceHandler.DeleteInsuranceSelection)
 
-	// 404
+
 	router.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Route not found"})
 	})

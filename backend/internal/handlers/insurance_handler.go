@@ -9,17 +9,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// InsuranceHandler จัดการ HTTP requests
+
 type InsuranceHandler struct {
 	repo *database.InsuranceRepository
 }
 
-// NewInsuranceHandler สร้าง handler ใหม่
+
 func NewInsuranceHandler(repo *database.InsuranceRepository) *InsuranceHandler {
 	return &InsuranceHandler{repo: repo}
 }
 
-// CreateInsuranceSelection POST /api/insurance-selection
+
 func (h *InsuranceHandler) CreateInsuranceSelection(c *gin.Context) {
 	var req models.CreateInsuranceSelectionRequest
 
@@ -32,8 +32,8 @@ func (h *InsuranceHandler) CreateInsuranceSelection(c *gin.Context) {
 
 selection, err := h.repo.CreateInsuranceSelection(&req)
 if err != nil {
-    // 👇 เพิ่มบรรทัดนี้ เพื่อ log error ใน terminal
-    log.Println("❌ Error creating insurance selection:", err)
+
+    log.Println("Error creating insurance selection:", err)
 
     c.JSON(http.StatusInternalServerError, models.ErrorResponse{
         Error: err.Error(),
@@ -47,7 +47,7 @@ if err != nil {
 	})
 }
 
-// GetInsuranceSelection GET /api/insurance-selection/:id
+//get1
 func (h *InsuranceHandler) GetInsuranceSelection(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
@@ -71,7 +71,7 @@ func (h *InsuranceHandler) GetInsuranceSelection(c *gin.Context) {
 	})
 }
 
-// GetAllInsuranceSelections GET /api/insurance-selections?limit=10&offset=0
+//all
 func (h *InsuranceHandler) GetAllInsuranceSelections(c *gin.Context) {
 	limitStr := c.DefaultQuery("limit", "10")
 	offsetStr := c.DefaultQuery("offset", "0")
@@ -101,7 +101,7 @@ func (h *InsuranceHandler) GetAllInsuranceSelections(c *gin.Context) {
 	})
 }
 
-// GetInsuranceSelectionsByBrand GET /api/insurance-selections/brand/:brand
+//getbrand
 func (h *InsuranceHandler) GetInsuranceSelectionsByBrand(c *gin.Context) {
 	brand := c.Param("brand")
 
@@ -119,7 +119,7 @@ func (h *InsuranceHandler) GetInsuranceSelectionsByBrand(c *gin.Context) {
 	})
 }
 
-// UpdateInsuranceSelection PUT /api/insurance-selection/:id
+
 func (h *InsuranceHandler) UpdateInsuranceSelection(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
@@ -152,7 +152,7 @@ func (h *InsuranceHandler) UpdateInsuranceSelection(c *gin.Context) {
 	})
 }
 
-// DeleteInsuranceSelection DELETE /api/insurance-selection/:id
+//del
 func (h *InsuranceHandler) DeleteInsuranceSelection(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
@@ -176,7 +176,7 @@ func (h *InsuranceHandler) DeleteInsuranceSelection(c *gin.Context) {
 	})
 }
 
-// HealthCheck GET /api/health
+//check
 func (h *InsuranceHandler) HealthCheck(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"status": "healthy",
